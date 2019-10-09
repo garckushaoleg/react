@@ -1,10 +1,5 @@
-import React from 'react';
-
-class TBody extends React.Component {
-    constructor() {
-      super();
-
-      this.contacts = [
+export default {
+    contacts: [
         {
           id: 1,
           name: 'Олег',
@@ -41,36 +36,4 @@ class TBody extends React.Component {
           tel: '073 000 4581'
         }
       ]
-    }
-
-    render() {
-      return (  
-        <tbody>
-          <TBodyView arr = {this.contacts}/>
-        </tbody>  
-     )  
-    }
-  }
-
-  class TBodyView extends React.Component {
-    constructor(props) {
-      super();
-
-      this.arr = props.arr
-    }
-
-    render() {
-      return (
-        this.arr.map((el) => {
-          return <tr key={el.id}>
-                   <td>{el.name}</td>
-                   <td>{el.surname}</td>
-                   <td>{el.age}</td>
-                   <td>{el.tel}</td>
-                 </tr>
-        })
-      )
-    }
-  }
-  
-  export default TBody;
+}

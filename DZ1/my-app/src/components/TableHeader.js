@@ -1,6 +1,6 @@
 import React from 'react';
 
-class THead extends React.Component {
+class TableHeader extends React.Component {
     constructor() {
       super()
     }
@@ -21,4 +21,4 @@ class THead extends React.Component {
   
   
   
-  export default THead;
+  export default TableHeader;

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import THead from './components/thead'
-import TBody from './components/tbody'
+import ContactsList from './components/ContactsList'
 
 class App extends React.Component {
   constructor() {
@@ -10,10 +9,7 @@ class App extends React.Component {
 
   render() {
     return (  
-      <table>
-        <THead />
-        <TBody />
-      </table>     
+      <ContactsList />     
    )  
   }
 }
