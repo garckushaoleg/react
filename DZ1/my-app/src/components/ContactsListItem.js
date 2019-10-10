@@ -1,24 +1,22 @@
 import React from 'react';
 
 class ContactsListItem extends React.Component {
-    constructor(props) {
-      super();
-
-      this.arr = props.arr
-    }
-
-    render() {
-      return (
-        this.arr.map((el) => {
-          return <tr key={el.id}>
-                   <td>{el.name}</td>
-                   <td>{el.surname}</td>
-                   <td>{el.age}</td>
-                   <td>{el.tel}</td>
-                 </tr>
-        })
-      )
-    }
+  constructor() {
+    super();
   }
 
-  export default ContactsListItem;
+  render() {
+    const {item} = this.props;
+
+    return (
+      <tr>
+        <td>{item.name}</td>
+        <td>{item.surname}</td>
+        <td>{item.age}</td>
+        <td>{item.tel}</td>
+      </tr>
+      )
+}
+  }
+
+export default ContactsListItem;
