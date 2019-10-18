@@ -12,31 +12,12 @@ class ContactEditingArea extends React.Component {
     surname: ''
   }
 
-  updateStateIfThereAreUneditedFields = () => {
-    if (this.state.id) {
-      if (!this.state.name) {
-
-        this.setState({
-          name: this.props.contact.name
-        })
-      }
-
-      if (!this.state.surname) {
-
-        this.setState({
-          surname: this.props.contact.surname
-        })
-      }
-    }
-  }
-
-  handlerClickOnSaveButton = async () => {
-    await this.updateStateIfThereAreUneditedFields();
+  handlerClickOnSaveButton = () => {
 
     this.props.onSubmit({
       id: this.state.id,
-      name: this.state.name,
-      surname: this.state.surname
+      name: this.props.contact.name,
+      surname: this.props.contact.surname
     });
 
     this.setState({

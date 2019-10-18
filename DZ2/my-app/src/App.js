@@ -47,7 +47,7 @@ class App extends React.Component {
     })
   }
 
-  checkForId = (item) => {
+  callRequiredMethod = (item) => {
     if (item.id) {
       this.editContact(item)
     } else {
@@ -81,9 +81,11 @@ class App extends React.Component {
 
   deleteContact = () => {
     const copyArray = [...this.state.contacts];
-    copyArray.splice(this.getIndex(this.state.contact), 1);
+    const contacts = copyArray.filter((item) => {
+      return item.id != this.state.contact.id
+    });
     this.setState({
-      contacts: copyArray
+      contacts: contacts
     });
     this.resetData();
   }
@@ -95,8 +97,8 @@ class App extends React.Component {
     this.resetData();
   }
 
-  resetData = async () => {
-    await this.setState({
+  resetData = () => {
+    this.setState({
       contact: {
         id:'',
         name: '',
@@ -130,7 +132,7 @@ class App extends React.Component {
           onSwitch={this.switchForm}
         />
         <ContactEditingArea
-          onSubmit={this.checkForId}
+          onSubmit={this.callRequiredMethod}
           onDelete={this.deleteContact}
           contact={this.state.contact}
           hidden={this.state.hidden}
