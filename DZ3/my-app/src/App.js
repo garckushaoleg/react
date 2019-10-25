@@ -13,46 +13,61 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  setItemToLocalStorage() {
     localStorage.setItem(this.key, JSON.stringify(this.state.data));
   }
 
-  addNewNote = (obj) => {
-    this.setState({
-      data: [...this.state.data, obj]
+  addNewNote = async () => {
+    const id = Date.now();
+    const newNote = {
+      id: id,
+      title: '',
+      description: ''
+    };
+
+    await this.setState({
+      data: [...this.state.data, newNote]
     });
+
+    this.setItemToLocalStorage();
   }
 
   setNote = (obj) => {
     const copyArray = [...this.state.data];
 
-    const index = copyArray.findIndex((el) => {
-      return el.id == obj.id
+    copyArray.forEach((el) => {
+      if (el.id == obj.id) {
+        for (const key in obj) {
+          el[key] = obj[key]
+        }
+      }
     });
-
-    copyArray.splice(index, 1, obj);
 
     this.setState({
-      data: [...copyArray]
+      data: copyArray
     });
+
+    this.setItemToLocalStorage();
   }
 
-  deleteNote = (id) => {
+  deleteNote = async (id) => {
     const arr = this.state.data.filter((el) => {
       return el.id != id
     });
 
-    this.setState({
-      data: [...arr]
+    await this.setState({
+      data: arr
     });
+
+    this.setItemToLocalStorage();
   }
 
   render() {
 
     return (
-      <div style={AppStyle}>
+      <div style={appStyle}>
         <ButtonForAddingNewNotes onClick = {this.addNewNote} />
-        <div style={NoteFormCntStyle}>
+        <div style={noteFormCntStyle}>
         {
           this.state.data.map((el) => {
             return <NoteForm 
@@ -69,11 +84,11 @@ class App extends React.Component {
   }
 }
 
-const AppStyle = {
+const appStyle = {
   width: '100%'
 }
 
-const NoteFormCntStyle = {
+const noteFormCntStyle = {
   width: '100%',
   display: 'flex',
   flexWrap: 'wrap'

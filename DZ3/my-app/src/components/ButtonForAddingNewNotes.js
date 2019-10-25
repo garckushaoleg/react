@@ -4,12 +4,7 @@ import PropTypes from 'prop-types';
 class ButtonForAddingNewNotes extends React.Component {
 
     onClickOnAddButton = () => {
-      const id = Date.now();
-        this.props.onClick({
-          id: id,
-          title: '',
-          description: ''
-        });
+      this.props.onClick();
     }
 
   render() {

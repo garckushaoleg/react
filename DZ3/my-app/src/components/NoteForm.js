@@ -5,47 +5,31 @@ import { noteType } from '../propTypes';
 class NoteForm extends React.Component {
 
   state = {
-    title: '',
-    description: ''
-  }
 
-  getId = (e) => {
-    return e.target.closest('form').dataset.id
   }
 
   handleInput = async (e) => {
-    const id = this.getId(e);
-
-    switch (e.target.name) {
-      case 'title': await this.setState({
-        id: id,
-        title: e.target.value
-      });
-      break;
-      case 'description': await this.setState({
-        id: id,
-        description: e.target.value
-      });
-      break;
-    };
+    await this.setState({
+      id: this.props.obj.id,
+      [e.target.name]: e.target.value
+    });
 
     this.props.onChange(this.state);
   }
 
-  onClickOnCloseButton = (e) => {
-    const id = this.getId(e);
-    this.props.onDelete(id);
+  onClickOnCloseButton = () => {
+    this.props.onDelete(this.props.obj.id);
   }
 
   render() {
 
     return (
-    <form style={NoteFormStyle} data-id = {this.props.obj.id}>
+    <form style={noteFormStyle} data-id = {this.props.obj.id}>
         <input 
           type="text" 
           name="title" 
           defaultValue = {this.props.obj.title} 
-          style = {NoteFormTitleStyle} 
+          style = {noteFormTitleStyle} 
           onInput = {this.handleInput}
         />
         <textarea 
@@ -53,12 +37,12 @@ class NoteForm extends React.Component {
           name="description"
           cols = "30" 
           rows = "10" 
-          style = {NoteFormDescriptionStyle} 
+          style = {noteFormDescriptionStyle} 
           onInput = {this.handleInput}
         ></textarea>
 
         <img src="./images/close.png" 
-          style={CloseButtonStyle} 
+          style={closeButtonStyle} 
           onClick = {this.onClickOnCloseButton} 
         />
     </form>
@@ -66,7 +50,7 @@ class NoteForm extends React.Component {
   }
 }
 
-const NoteFormStyle = {
+const noteFormStyle = {
     border: "1px solid black",
     width: '100%',
     maxWidth: '300px',
@@ -79,15 +63,15 @@ const NoteFormStyle = {
     position: 'relative'
 }
 
-const NoteFormTitleStyle = {
+const noteFormTitleStyle = {
   border: '1px solid red'
 }
 
-const NoteFormDescriptionStyle = {
+const noteFormDescriptionStyle = {
   border: '1px solid red'
 }
 
-const CloseButtonStyle = {
+const closeButtonStyle = {
   position: 'absolute',
   width: '40px',
   height: '40px',
