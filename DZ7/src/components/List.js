@@ -1,18 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import useStyles from '../theme';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(3, 2),
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-}));
 
 function List({ todos, removeTodo, toggleTodo }) {
     const classes = useStyles();
