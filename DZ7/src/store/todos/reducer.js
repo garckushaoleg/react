@@ -28,12 +28,15 @@ export default function (state = initialState, { type, payload }) {
         case TODOS_REMOVE_TODO:
             return state.filter(todo => todo.id != payload)
         case TODOS_TOGGLE_TODO:
-            const copyState = [...state];
+            const copyState = state.map((todo) => {
+                return {...todo}
+            });
             copyState.forEach((todo) => {
                 if (todo.id == payload) {
                     console.log('before=', todo.isDone);
                     todo.isDone = !todo.isDone;
                     console.log('after=', todo.isDone);
+                    console.log(state);
                 }
             });
             return copyState

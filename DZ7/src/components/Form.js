@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useStyles from '../theme';
 
-export default function Form({addTodo}) {
+export default function Form({ addTodo }) {
 
     const classes = useStyles();
 
@@ -17,7 +17,7 @@ export default function Form({addTodo}) {
                     const errors = {};
 
                     if (!values.title) {
-                        errors.name = 'Required';
+                        errors.title = 'Required';
                     }
 
                     return errors;
@@ -28,8 +28,10 @@ export default function Form({addTodo}) {
                     resetForm();
                 }}
             >
-                {({ values, errors, touched, handleChange, handleSubmit }) => (
-                    <form onSubmit={handleSubmit} style={formToAddStyle} noValidate autoComplete="off">
+                {({ values, errors, touched, handleChange, handleSubmit }) => {
+                    const error = errors.title && touched.title ? errors.title : '';
+                    
+                    return (<form onSubmit={handleSubmit} style={formToAddStyle} noValidate autoComplete="off">
                         <TextField
                             type="text"
                             name="title"
@@ -41,19 +43,20 @@ export default function Form({addTodo}) {
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
+                            error={!!error}
+                            helperText={error}
                         />
-                        {errors.name && touched.name && errors.name}
 
                         <Button
                             type="submit"
-                            variant="contained" 
-                            color="primary" 
+                            variant="contained"
+                            color="primary"
                             className={classes.button}
                         >
                             Send
                         </Button>
-                    </form>
-                )}
+                    </form>)
+                }}
             </Formik>
         </div>
     )
